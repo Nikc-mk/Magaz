@@ -15,38 +15,18 @@
 
 
 
-
-
-    <form class="row g-3 needs-validation" novalidate>
-        <div class="col-md-4">
-            <label for="validationCustomUsername" class="form-label">Имя пользователя</label>
-            <div class="input-group has-validation">
-                <input type="text" class="form-control" id="validationCustomUsername"
-                       aria-describedby="inputGroupPrepend" required>
-                <div class="invalid-feedback">
-                    Пожалуйста, выберите имя пользователя.
-                </div>
-            </div>
+    <h1>Комментарии</h1>
+    {% for comment in comment_list %}
+        <div>
+            <p>{{ comment.text }}</p>
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit">Отправить форму</button>
-        </div>
-    </form>
-
-    {% for comment in comments %}
-        {{ comment }}
     {% endfor %}
 
 
 
-    <form action="/comment/" method="post">
-        <label for="comment">Your name: </label>
-        <input id="comment" type="text" name="comment" value="{{ comment }}">
-        <input type="submit" value="OK">
-    </form>
-    {{ post.body|linebreaks }}
+
+
+
+
+
 {% endblock %}

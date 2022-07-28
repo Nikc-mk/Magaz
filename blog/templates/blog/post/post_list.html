@@ -4,49 +4,27 @@
     <h1>Статьи</h1>
 
     {% for post in post_list %}
-        <div class="card text-center">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="{{ post.get_absolute_url }}">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">Автор: {{ post.author }}. Дата публикации {{ post.publish }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Перейти к статье</a>
-            </div>
+        <div class="card-body">
+            <a class="card-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            <div><img src="{{ post.image.url }}" alt="{{ post.image.name }}"></div>
+            <p class="tags">Теги: {{ post.tags.all|join:", " }}</p>
+            <p class="card-text">Автор: {{ post.author }}. Дата публикации {{ post.publish }}</p>
         </div>
+
     {% endfor %}
-
-
-    <nav aria-label="Page navigation post_list">
-        <ul class="pagination">
-
+    <nav id="paginator">
+        <ul>
             {% if page_obj.has_previous %}
-                <li class="page-item">
+                <li>
                     <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
                 </li>
-
-
             {% endif %}
 
             {% if page_obj.has_next %}
-                <li class="page-item disabled" aria-current="page">
-                    <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-                </li>
+                <li><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+                <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
             {% endif %}
-
         </ul>
     </nav>
 
